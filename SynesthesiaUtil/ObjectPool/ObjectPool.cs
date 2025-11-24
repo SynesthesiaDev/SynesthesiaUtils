@@ -5,8 +5,6 @@ namespace SynesthesiaUtil.ObjectPool
 {
     public class ObjectPool<T> where T : class
     {
-        private const int QUEUE_SIZE = 32768;
-
         private readonly Func<T> _supplier;
 
         private readonly Func<T, T> _sanitizer;
@@ -19,7 +17,6 @@ namespace SynesthesiaUtil.ObjectPool
         {
             _supplier = supplier ?? throw new ArgumentNullException(nameof(supplier));
 
-            // If no sanitizer is provided, use a function that returns the object unchanged (identity)
             _sanitizer = sanitizer ?? (obj => obj);
         }
 
@@ -33,7 +30,6 @@ namespace SynesthesiaUtil.ObjectPool
                 }
             }
 
-            // Pool is empty or only contained collected objects, so create a new one
             var newObj = _supplier.Invoke();
             return new PooledObject<T>(this, newObj);
         }
