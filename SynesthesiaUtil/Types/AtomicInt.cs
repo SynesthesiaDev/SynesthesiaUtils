@@ -1,0 +1,19 @@
+namespace SynesthesiaUtil.Types;
+
+public class AtomicInt(int initialValue) : Atomic<int>(initialValue)
+{
+    public int Increment()
+    {
+        return Update(Value => Value + 1);
+    }
+
+    public int Decrement()
+    {
+        return Update(Value => Value - 1);
+    }
+
+    public override string ToString()
+    {
+        return Value.ToString();
+    }
+}

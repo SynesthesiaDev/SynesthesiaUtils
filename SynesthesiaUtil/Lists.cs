@@ -5,14 +5,10 @@ namespace SynesthesiaUtil
 {
     public static class Lists
     {
-        public static List<T> Of<T>(params T[] values)
-        {
-            return new List<T>(values);
-        }
+        public static List<T> Of<T>() => [];
 
-        public static ImmutableList<T> Immutable<T>(params T[] values)
-        {
-            return ImmutableList.Create(values);
-        }
+        public static List<T> Of<T>(params T[] values) => [..values];
+
+        public static ImmutableList<T> Immutable<T>(params T[] values) => ImmutableList.Create(values);
     }
 }
