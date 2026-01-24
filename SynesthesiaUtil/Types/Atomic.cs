@@ -3,7 +3,7 @@ using System;
 namespace SynesthesiaUtil.Types;
 
 
-public class Atomic<T>(T value)
+public class Atomic<T>(T value) : IAtomic
 {
     private readonly object _lock = new object();
     private T _value = value;
@@ -34,4 +34,6 @@ public class Atomic<T>(T value)
             return _value;
         }
     }
+
+    public string GetValueAsString() => Value?.ToString() ?? "null";
 }
