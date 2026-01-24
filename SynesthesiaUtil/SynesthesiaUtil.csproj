@@ -5,7 +5,7 @@
         <LangVersion>12</LangVersion>
         <Nullable>enable</Nullable>
         <PackageId>SynesthesiaUtils</PackageId>
-        <Version>1.1</Version>
+        <Version>1.2</Version>
         <Authors>SynesthesiaDev_</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageReadmeFile>README.md</PackageReadmeFile>
