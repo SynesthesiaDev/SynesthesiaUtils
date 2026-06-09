@@ -1,3 +1,6 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,70 +10,78 @@ namespace SynesthesiaUtil.Extensions;
 
 public static class StringExtensions
 {
-    public static int ToInt(this string source)
+    extension(string source)
     {
-        return int.Parse(source);
-    }
+        public int ToInt()
+        {
+            return int.Parse(source);
+        }
 
-    public static double ToDouble(this string source)
-    {
-        return double.Parse(source);
-    }
+        public double ToDouble()
+        {
+            return double.Parse(source);
+        }
 
-    public static float ToFloat(this string source)
-    {
-        return float.Parse(source);
-    }
+        public float ToFloat()
+        {
+            return float.Parse(source);
+        }
 
-    public static byte ToByte(this string source)
-    {
-        return byte.Parse(source);
-    }
+        public byte ToByte()
+        {
+            return byte.Parse(source);
+        }
 
-    public static short ToShort(this string source)
-    {
-        return short.Parse(source);
-    }
+        public short ToShort()
+        {
+            return short.Parse(source);
+        }
 
-    public static long ToLong(this string source)
-    {
-        return long.Parse(source);
-    }
+        public long ToLong()
+        {
+            return long.Parse(source);
+        }
 
-    public static bool ToBoolean(this string source)
-    {
-        return source.ToLower().Equals("true");
-    }
+        public bool ToBoolean()
+        {
+            return source.ToLower().Equals("true");
+        }
 
-    public static string RemovePrefix(this string source, string prefix)
-    {
-        if (string.IsNullOrEmpty(prefix)) return source;
+        public string RemovePrefix(string prefix)
+        {
+            if (string.IsNullOrEmpty(prefix)) return source;
 
-        return source.StartsWith(prefix) ? source.Substring(prefix.Length) : source;
-    }
+            return source.StartsWith(prefix) ? source.Substring(prefix.Length) : source;
+        }
 
-    public static string RemoveSuffix(this string source, string suffix)
-    {
-        if (string.IsNullOrEmpty(source)) return source;
+        public string RemoveSuffix(string suffix)
+        {
+            if (string.IsNullOrEmpty(source)) return source;
 
-        return source.EndsWith(suffix) ? source.Substring(0, source.Length - suffix.Length) : source;
-    }
+            return source.EndsWith(suffix) ? source.Substring(0, source.Length - suffix.Length) : source;
+        }
 
-    public static bool IsEmpty(this string source)
-    {
-        return string.IsNullOrEmpty(source);
-    }
+        public bool IsEmpty()
+        {
+            return string.IsNullOrEmpty(source);
+        }
 
-    public static Tuple<int, int, int> HexToRgb(this string source)
-    {
-        var rgb = formatHexString(2, false, source);
-        return new Tuple<int, int, int>(rgb[0], rgb[1], rgb[2]);
-    }
+        public Tuple<int, int, int> HexToRgb()
+        {
+            var rgb = formatHexString(2, false, source);
+            return new Tuple<int, int, int>(rgb[0], rgb[1], rgb[2]);
+        }
 
-    public static Tuple<int, int, int, int> HexToRgba(this string source)
-    {
-        var rgb = formatHexString(2, true, source);
-        return new Tuple<int, int, int, int>(rgb[0], rgb[1], rgb[2], rgb[3]);
+        public Tuple<int, int, int, int> HexToRgba()
+        {
+            var rgb = formatHexString(2, true, source);
+            return new Tuple<int, int, int, int>(rgb[0], rgb[1], rgb[2], rgb[3]);
+        }
+
+        public string CutIfTooLong(int maxLenght, bool threeDots = true)
+        {
+            return source.Length >= maxLenght ? $"{source.Substring(0, maxLenght)}" + (threeDots ? "..." : "") : source;
+        }
     }
 
     private static int[] formatHexString(int numberOfBytes, bool hasAlpha, string source)
@@ -97,26 +108,24 @@ public static class StringExtensions
         return [red, green, blue, alpha];
     }
 
-    public static string CutIfTooLong(this string text, int maxLenght, bool threeDots = true)
-    {
-        return text.Length >= maxLenght ? $"{text.Substring(0, maxLenght)}" + (threeDots ? "..." : "") : text;
-    }
-
-    public static V? GetOrNull<K, V>(this Dictionary<K, V> dictionary, K key) where K : notnull
+    public static TV? GetOrNull<TK, TV>(this Dictionary<TK, TV> dictionary, TK key) where TK : notnull
     {
         return dictionary.GetValueOrDefault(key);
     }
 
-    public static T? LastOrNull<T>(this IEnumerable<T> enumerable)
+    extension<T>(IEnumerable<T> enumerable)
     {
-        var arr = enumerable.ToArray();
-        return arr.Length == 0 ? default : arr.Last();
-    }
+        public T? LastOrNull()
+        {
+            var arr = enumerable.ToArray();
+            return arr.Length == 0 ? default : arr.Last();
+        }
 
-    public static IEnumerable<T> Reversed<T>(this IEnumerable<T> enumerable)
-    {
-        var newList = enumerable.ToList();
-        newList.Reverse();
-        return newList;
+        public IEnumerable<T> Reversed()
+        {
+            var newList = enumerable.ToList();
+            newList.Reverse();
+            return newList;
+        }
     }
 }

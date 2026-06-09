@@ -1,23 +1,26 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System;
 
 namespace SynesthesiaUtil.Randomness;
 
-public static class RNG
+public static class Rng
 {
-    private static Random _random = new();
+    private static Random random = new();
 
     public static void SetSeed(int seed)
     {
-        _random = new Random(seed);
+        random = new Random(seed);
     }
 
-    public static void RandomBytes(byte[] buffer) => _random.NextBytes(buffer);
+    public static void RandomBytes(byte[] buffer) => random.NextBytes(buffer);
 
-    public static int RandomInt(int min, int max) => _random.Next(min, max);
+    public static int RandomInt(int min, int max) => random.Next(min, max);
 
     public static float RandomFloat(float min, float max) => (float)(RandomDouble(min, max));
 
-    public static double RandomDouble(double min, double max) => _random.NextDouble() * (max - min) + min;
+    public static double RandomDouble(double min, double max) => random.NextDouble() * (max - min) + min;
 
-    public static long RandomLong(long min, long max) => _random.NextInt64(min, max);
+    public static long RandomLong(long min, long max) => random.NextInt64(min, max);
 }

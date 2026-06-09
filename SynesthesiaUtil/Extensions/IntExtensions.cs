@@ -1,32 +1,38 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System;
 
 namespace SynesthesiaUtil.Extensions
 {
     public static class IntExtensions
     {
-        public static bool ToBoolean(this int source)
+        extension(int source)
         {
-            return source == 1;
-        }
+            public bool ToBoolean()
+            {
+                return source == 1;
+            }
 
-        public static byte ToByte(this int source)
-        {
-            return Convert.ToByte(source);
-        }
+            public byte ToByte()
+            {
+                return Convert.ToByte(source);
+            }
 
-        public static float ToFloat(this int source)
-        {
-            return Convert.ToDouble(source).ToFloat();
-        }
+            public float ToFloat()
+            {
+                return Convert.ToDouble(source).ToFloat();
+            }
 
-        public static double ToDouble(this int source)
-        {
-            return Convert.ToDouble(source);
-        }
+            public double ToDouble()
+            {
+                return Convert.ToDouble(source);
+            }
 
-        public static short ToShort(this int source)
-        {
-            return Convert.ToInt16(source);
+            public short ToShort()
+            {
+                return Convert.ToInt16(source);
+            }
         }
     }
 }

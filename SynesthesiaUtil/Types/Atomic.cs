@@ -1,37 +1,41 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System;
+using System.Threading;
 
 namespace SynesthesiaUtil.Types;
 
 
-public class Atomic<T>(T value) : IAtomic
+public class Atomic<T>(T atomicValue) : IAtomic
 {
-    private readonly object _lock = new object();
-    private T _value = value;
+    private readonly Lock @lock = new Lock();
+    private T atomicValue = atomicValue;
 
     public T Value
     {
         get
         {
-            lock (_lock)
+            lock (@lock)
             {
-                return _value;
+                return atomicValue;
             }
         }
         set
         {
-            lock (_lock)
+            lock (@lock)
             {
-                _value = value;
+                atomicValue = value;
             }
         }
     }
 
     public T Update(Func<T, T> updateFunction)
     {
-        lock (_lock)
+        lock (@lock)
         {
-            _value = updateFunction(_value);
-            return _value;
+            atomicValue = updateFunction(atomicValue);
+            return atomicValue;
         }
     }
 

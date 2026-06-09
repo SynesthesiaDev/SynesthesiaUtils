@@ -1,33 +1,39 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System;
 
 namespace SynesthesiaUtil.Extensions;
 
 public static class DoubleExtensions
 {
-    public static float ToFloat(this double source)
+    extension(double source)
     {
-        return (float)source;
-    }
-
-    public static double FindPrecision(this double source)
-    {
-        var precision = 0;
-
-        // ReSharper disable once CompareOfFloatsByEqualityOperator
-        while (source != Math.Round(source))
+        public float ToFloat()
         {
-            source *= 10;
-            precision++;
+            return (float)source;
         }
 
-        return precision;
-    }
+        public double FindPrecision()
+        {
+            var precision = 0;
 
-    public static double FloorToDecimalDigits(this double value, uint digits)
-    {
-        var base10 = Math.Pow(10, digits);
-        return Math.Floor(value * base10) / base10;
-    }
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            while (source != Math.Round(source))
+            {
+                source *= 10;
+                precision++;
+            }
 
-    public static int RoundBPM(this double baseBpm, double rate = 1) => (int)Math.Round(baseBpm * rate);
+            return precision;
+        }
+
+        public double FloorToDecimalDigits(uint digits)
+        {
+            var base10 = Math.Pow(10, digits);
+            return Math.Floor(source * base10) / base10;
+        }
+
+        public int RoundBpm(double rate = 1) => (int)Math.Round(source * rate);
+    }
 }

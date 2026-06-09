@@ -1,3 +1,6 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,29 +11,32 @@ namespace SynesthesiaUtil.Extensions
 {
     public static class ListExtensions
     {
-        public static T Random<T>(this List<T> source)
+        extension<T>(List<T> source)
         {
-            return source[RNG.RandomInt(0, source.Count)];
-        }
+            public T Random()
+            {
+                return source[Rng.RandomInt(0, source.Count)];
+            }
 
-        public static List<T> Filter<T>(this List<T> source, Predicate<T> predicate)
-        {
-            return source.FindAll(predicate);
-        }
+            public List<T> Filter(Predicate<T> predicate)
+            {
+                return source.FindAll(predicate);
+            }
 
-        public static bool IsEmpty<T>(this List<T> source)
-        {
-            return source.Count == 0;
-        }
+            public bool IsEmpty()
+            {
+                return source.Count == 0;
+            }
 
-        public static bool IsNotEmpty<T>(this List<T> source)
-        {
-            return source.Count != 0;
-        }
+            public bool IsNotEmpty()
+            {
+                return source.Count != 0;
+            }
 
-        public static ImmutableList<T> ToImmutable<T>(this List<T> source)
-        {
-            return ImmutableList.Create<T>(source.ToArray());
+            public ImmutableList<T> ToImmutable()
+            {
+                return ImmutableList.Create<T>(source.ToArray());
+            }
         }
 
         public static IEnumerable<IEnumerable<T>> CartesianProduct<T>(this IEnumerable<IEnumerable<T>> sequences)
@@ -42,7 +48,7 @@ namespace SynesthesiaUtil.Extensions
                 (accumulator, sequence) =>
                     from accseq in accumulator
                     from item in sequence
-                    select accseq.Concat(new[] { item })
+                    select accseq.Concat([item])
             );
         }
     }

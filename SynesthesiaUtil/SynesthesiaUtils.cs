@@ -10,7 +10,7 @@ public static class SynesthesiaUtils
     public static bool IsDebugBuild => is_debug_build.Value;
 
     private static readonly Lazy<bool> is_debug_build = new Lazy<bool>(() =>
-        isDebugAssembly(typeof(SynesthesiaUtils).Assembly) || isDebugAssembly(RuntimeInfo.Assembly)
+        isDebugAssembly(typeof(SynesthesiaUtils).Assembly) || isDebugAssembly(RuntimeInfo.ASSEMBLY)
     );
 
     // https://stackoverflow.com/a/2186634

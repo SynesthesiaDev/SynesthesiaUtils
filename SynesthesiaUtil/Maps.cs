@@ -1,3 +1,6 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -7,22 +10,22 @@ namespace SynesthesiaUtil
     public static class Maps
     {
 
-        public static Dictionary<K, V> Of<K, V>(params KeyValuePair<K, V>[] values) where K : notnull
+        public static Dictionary<TK, TV> Of<TK, TV>(params KeyValuePair<TK, TV>[] values) where TK : notnull
         {
-            return new Dictionary<K, V>(values);
+            return new Dictionary<TK, TV>(values);
         }
 
-        public static Dictionary<K, V> Of<K, V>() where K : notnull
+        public static Dictionary<TK, TV> Of<TK, TV>() where TK : notnull
         {
-            return new Dictionary<K, V>();
+            return new Dictionary<TK, TV>();
         }
 
-        public static Dictionary<K, V> Of<K, V>(params (K, V)[] values) where K : notnull
+        public static Dictionary<TK, TV> Of<TK, TV>(params (TK, TV)[] values) where TK : notnull
         {
             return values.ToDictionary();
         }
 
-        public static ImmutableDictionary<K, V> Immutable<K, V>(params KeyValuePair<K, V>[] values) where K : notnull
+        public static ImmutableDictionary<TK, TV> Immutable<TK, TV>(params KeyValuePair<TK, TV>[] values) where TK : notnull
         {
             return ImmutableDictionary.CreateRange(values.AsEnumerable());
         }

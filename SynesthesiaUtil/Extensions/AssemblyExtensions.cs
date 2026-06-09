@@ -1,3 +1,6 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -6,23 +9,26 @@ namespace SynesthesiaUtil.Extensions;
 
 public static class AssemblyExtensions
 {
-    public static byte[] GetResource(this Assembly assembly, string path)
+    extension(Assembly assembly)
     {
-        using var stream = assembly.GetManifestResourceStream(path);
-        if (stream == null) throw new FileNotFoundException($"Embedded resource '{path}' does not exist!");
-        using var memoryStream = new MemoryStream();
+        public byte[] GetResource(string path)
+        {
+            using var stream = assembly.GetManifestResourceStream(path);
+            if (stream == null) throw new FileNotFoundException($"Embedded resource '{path}' does not exist!");
+            using var memoryStream = new MemoryStream();
 
-        stream.CopyTo(memoryStream);
-        var array = memoryStream.ToArray();
+            stream.CopyTo(memoryStream);
+            var array = memoryStream.ToArray();
 
-        stream.Close();
-        memoryStream.Close();
+            stream.Close();
+            memoryStream.Close();
 
-        return array;
-    }
+            return array;
+        }
 
-    public static string GetTextResource(this Assembly assembly, string path)
-    {
-        return Encoding.UTF8.GetString(assembly.GetResource(path));
+        public string GetTextResource(string path)
+        {
+            return Encoding.UTF8.GetString(assembly.GetResource(path));
+        }
     }
 }

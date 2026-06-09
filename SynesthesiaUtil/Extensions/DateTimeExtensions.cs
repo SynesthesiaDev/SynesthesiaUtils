@@ -1,3 +1,6 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System;
 
 namespace SynesthesiaUtil.Extensions;
@@ -8,7 +11,6 @@ public static class DateTimeExtensions
     {
         return DateTimeOffset.FromUnixTimeMilliseconds(time);
     }
-
 
     public static string ToProperlyFormatted(this DateTimeOffset dateTimeOffset)
     {
@@ -24,7 +26,7 @@ public static class DateTimeExtensions
 
     public static string GetDaySuffix(int day)
     {
-        if (day >= 11 && day <= 13) return "th";
+        if (day is >= 11 and <= 13) return "th";
         return (day % 10) switch
         {
             1 => "st",

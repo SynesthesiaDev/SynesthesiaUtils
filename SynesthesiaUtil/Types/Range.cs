@@ -1,16 +1,19 @@
+// Copyright (c) 2026 SynesthesiaDev <synesthesiadev@proton.me>. Licensed under the MIT Licence.
+// See the LICENCE file in the repository root for full licence text.
+
 using System;
 using SynesthesiaUtil.Extensions;
 
 namespace SynesthesiaUtil.Types
 {
-    public interface Range<T>
+    public interface IRange<out T>
     {
-        public T Random();
-        public T Start { get; }
-        public T End { get; }
+        T Random();
+        T Start { get; }
+        T End { get; }
     };
 
-    public record IntRange(int Start, int End) : Range<int>
+    public record IntRange(int Start, int End) : IRange<int>
     {
         public int Random()
         {
@@ -18,7 +21,7 @@ namespace SynesthesiaUtil.Types
         }
     }
 
-    public record ByteRange(byte Start, byte End) : Range<byte>
+    public record ByteRange(byte Start, byte End) : IRange<byte>
     {
         public byte Random()
         {
@@ -26,7 +29,7 @@ namespace SynesthesiaUtil.Types
         }
     }
 
-    public record DoubleRange(double Start, double End) : Range<double>
+    public record DoubleRange(double Start, double End) : IRange<double>
     {
         public double Random()
         {
@@ -34,7 +37,7 @@ namespace SynesthesiaUtil.Types
         }
     }
 
-    public record FloatRange(float Start, float End) : Range<float>
+    public record FloatRange(float Start, float End) : IRange<float>
     {
         public float Random()
         {
@@ -42,7 +45,7 @@ namespace SynesthesiaUtil.Types
         }
     }
 
-    public record LongRange(long Start, long End) : Range<long>
+    public record LongRange(long Start, long End) : IRange<long>
     {
         public long Random()
         {
@@ -50,7 +53,7 @@ namespace SynesthesiaUtil.Types
         }
     }
 
-    public record ShortRange(short Start, short End) : Range<short>
+    public record ShortRange(short Start, short End) : IRange<short>
     {
         public short Random()
         {
