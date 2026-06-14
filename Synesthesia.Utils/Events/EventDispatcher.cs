@@ -12,6 +12,8 @@ public class EventDispatcher<T> : IDisposable
     private volatile EventSubscriber<T>[] eventSubscribers = [];
     private readonly Lock writeLock = new();
 
+    public bool HasSubscribers => eventSubscribers.Length > 0;
+
     public bool IsDisposed { get; private set; }
 
     public EventSubscriber<T> Subscribe(Action<T> action)
