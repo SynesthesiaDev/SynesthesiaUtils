@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Text;
 using Synesthesia.Utils.Randomness;
 
 namespace Synesthesia.Utils.Extensions
@@ -50,6 +51,19 @@ namespace Synesthesia.Utils.Extensions
                     from item in sequence
                     select accseq.Concat([item])
             );
+        }
+
+        public static string ToListString<T>(this ICollection<T> collection)
+        {
+            var builder = new StringBuilder();
+            builder.Append("[");
+            foreach (var (index, item) in collection.Index())
+            {
+                builder.Append($"{item}");
+                if (index != collection.Count - 1) builder.Append(", ");
+            }
+
+            return builder.Append("]").ToString();
         }
     }
 }
