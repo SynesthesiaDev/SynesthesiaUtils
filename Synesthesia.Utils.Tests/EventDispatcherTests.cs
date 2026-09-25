@@ -66,11 +66,12 @@ public class EventDispatcherTests
     public void Unsubscribe_WhenSubscriberDoesNotExist_DoesNothing()
     {
         var dispatcher = new EventDispatcher<int>();
+        var unrelatedDispatcher = new EventDispatcher<int>();
         var callCount = 0;
 
         dispatcher.Subscribe(_ => callCount++);
 
-        var unrelatedSubscriber = new EventSubscriber<int>(_ => { });
+        var unrelatedSubscriber = new EventSubscriber<int>(_ => { }, unrelatedDispatcher);
 
         Assert.DoesNotThrow(() => dispatcher.Unsubscribe(unrelatedSubscriber));
 

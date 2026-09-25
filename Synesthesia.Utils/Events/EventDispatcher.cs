@@ -18,7 +18,7 @@ public class EventDispatcher<T> : IDisposable
 
     public EventSubscriber<T> Subscribe(Action<T> action)
     {
-        var eventSubscriber = new EventSubscriber<T>(action);
+        var eventSubscriber = new EventSubscriber<T>(action, this);
         lock (writeLock)
         {
             ObjectDisposedException.ThrowIf(IsDisposed, this);
@@ -82,4 +82,7 @@ public class EventDispatcher<T> : IDisposable
     }
 }
 
-public record EventSubscriber<T>(Action<T> Action);
+public record EventSubscriber<T>(Action<T> Action, EventDispatcher<T> OwningDispatcher) : IDisposable
+{
+    public void Dispose() => OwningDispatcher.Unsubscribe(this);
+}
